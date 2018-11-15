@@ -2,7 +2,7 @@
 .project
 .cproject
 Debug
-Firmware/Configuration_prusa.h
+
 Firmware/Doc
 /Firmware/.vs/Firmware/v14
 /Firmware/__vm
@@ -16,3 +16,4 @@ Firmware/Doc
 /html
 /latex
 /Doxyfile
+.vscode/
