@@ -9,6 +9,8 @@
 
 //internationalized messages
 const char MSG_AUTO_HOME[] PROGMEM_I1 = ISTR("Auto home"); ////c=0 r=0
+const char MSG_G80[] PROGMEM_I1 = ISTR("G29"); ////c=0 r=0
+const char MSG_G28[] PROGMEM_I1 = ISTR("G28"); ////c=0 r=0
 const char MSG_AUTO_MODE_ON[] PROGMEM_I1 = ISTR("Mode [auto power]"); ////c=0 r=0
 const char MSG_BABYSTEP_Z[] PROGMEM_I1 = ISTR("Live adjust Z"); ////c=0 r=0
 const char MSG_BABYSTEP_Z_NOT_SET[] PROGMEM_I1 = ISTR("Distance between tip of the nozzle and the bed surface has not been set yet. Please follow the manual, chapter First steps, section First layer calibration."); ////c=20 r=12
@@ -106,7 +108,7 @@ const char MSG_WIZARD_DONE[] PROGMEM_I1 = ISTR("All is done. Happy printing!"); 
 const char MSG_WIZARD_HEATING[] PROGMEM_I1 = ISTR("Preheating nozzle. Please wait."); ////c=20 r=3
 const char MSG_WIZARD_QUIT[] PROGMEM_I1 = ISTR("You can always resume the Wizard from Calibration -> Wizard."); ////c=20 r=8
 const char MSG_YES[] PROGMEM_I1 = ISTR("Yes"); ////c=0 r=0
-const char WELCOME_MSG[] PROGMEM_I1 = ISTR(CUSTOM_MENDEL_NAME " ready."); ////c=20 r=0
+const char WELCOME_MSG[] PROGMEM_I1 = ISTR(CUSTOM_MENDEL_NAME " cause coal."); ////c=20 r=0
 //not internationalized messages
 const char MSG_BROWNOUT_RESET[] PROGMEM_N1 = " Brown out Reset"; ////c=0 r=0
 const char MSG_EXTERNAL_RESET[] PROGMEM_N1 = " External Reset"; ////c=0 r=0

@@ -5554,77 +5554,30 @@ static void lcd_test_menu()
 	w25x20cl_disable_wr();
 }
 
+static void hybrix_mesh_bed_level() {
+	enquecommand_P(PSTR("G1 Z50"));
+	enquecommand_P(PSTR("G80"));
+}
+
 static void lcd_main_menu()
 {
+	MENU_BEGIN();
+	MENU_ITEM_BACK_P(_T(MSG_WATCH));
+	MENU_ITEM_FUNCTION_P(PSTR("G80"), hybrix_mesh_bed_level);
+	MENU_ITEM_GCODE_P(_T(MSG_G28), PSTR("G28 W"));
 
-  MENU_BEGIN();
+	#ifdef RESUME_DEBUG 
+		if (!saved_printing) 
+			MENU_ITEM_FUNCTION_P(PSTR("tst - Save"), lcd_menu_test_save);
+		else
+			MENU_ITEM_FUNCTION_P(PSTR("tst - Restore"), lcd_menu_test_restore);
+	#endif //RESUME_DEBUG 
 
-  // Majkl superawesome menu
+	#ifdef TMC2130_DEBUG
+		MENU_ITEM_FUNCTION_P(PSTR("recover print"), recover_print);
+		MENU_ITEM_FUNCTION_P(PSTR("power panic"), uvlo_);
+	#endif //TMC2130_DEBUG
 
-
- MENU_ITEM_BACK_P(_T(MSG_WATCH));
-
-#ifdef RESUME_DEBUG 
- if (!saved_printing) 
-  MENU_ITEM_FUNCTION_P(PSTR("tst - Save"), lcd_menu_test_save);
- else
-  MENU_ITEM_FUNCTION_P(PSTR("tst - Restore"), lcd_menu_test_restore);
-#endif //RESUME_DEBUG 
-
-#ifdef TMC2130_DEBUG
- MENU_ITEM_FUNCTION_P(PSTR("recover print"), recover_print);
- MENU_ITEM_FUNCTION_P(PSTR("power panic"), uvlo_);
-#endif //TMC2130_DEBUG
-
- /* if (farm_mode && !IS_SD_PRINTING )
-    {
-    
-        int tempScrool = 0;
-        if (lcd_draw_update == 0 && LCD_CLICKED == 0)
-            //delay(100);
-            return; // nothing to do (so don't thrash the SD card)
-        uint16_t fileCnt = card.getnrfilenames();
-        
-        card.getWorkDirName();
-        if (card.filename[0] == '/')
-        {
-#if SDCARDDETECT == -1
-            MENU_ITEM_FUNCTION_P(_T(MSG_REFRESH), lcd_sd_refresh);
-#endif
-        } else {
-            MENU_ITEM_FUNCTION_P(PSTR(LCD_STR_FOLDER ".."), lcd_sd_updir);
-        }
-        
-        for (uint16_t i = 0; i < fileCnt; i++)
-        {
-            if (menu_item == menu_line)
-            {
-#ifndef SDCARD_RATHERRECENTFIRST
-                card.getfilename(i);
-#else
-                card.getfilename(fileCnt - 1 - i);
-#endif
-                if (card.filenameIsDir)
-                {
-                    MENU_ITEM_SDDIR(_T(MSG_CARD_MENU), card.filename, card.longFilename);
-                } else {
-                    
-                    MENU_ITEM_SDFILE(_T(MSG_CARD_MENU), card.filename, card.longFilename);
-                    
-                    
-                    
-                    
-                }
-            } else {
-                MENU_ITEM_DUMMY();
-            }
-        }
-        
-        MENU_ITEM_BACK_P(PSTR("- - - - - - - - -"));
-    
-        
-    }*/
- 
   if ( ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LCD_COMMAND_V2_CAL)) && (current_position[Z_AXIS] < Z_HEIGHT_HIDE_LIVE_ADJUST_MENU) && !homing_flag && !mesh_bed_leveling_flag)
   {
 	MENU_ITEM_SUBMENU_P(_T(MSG_BABYSTEP_Z), lcd_babystep_z);//8

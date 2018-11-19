@@ -5649,6 +5649,7 @@ Sigma_Exit:
           disable_e1();
           disable_e2();
           finishAndDisableSteppers();
+          disable_z();
         }
         else
         {

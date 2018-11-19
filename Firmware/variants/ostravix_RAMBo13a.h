@@ -29,13 +29,15 @@
 //#define E3D_PT100_BED_WITH_AMP
 //#define E3D_PT100_BED_NO_AMP
 
-
 /*------------------------------------
  AXIS SETTINGS
  *------------------------------------*/
 
 // Steps per unit {X,Y,Z,E}
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,133}
+#define DEFAULT_AXIS_STEPS_PER_UNIT \
+    {                               \
+        100, 64, 3200 / 8, 133      \
+    }
 
 // Endstop inverting
 #define X_MIN_ENDSTOP_INVERTING 0 // set to 1 to invert the logic of the endstop.
@@ -43,12 +45,12 @@
 #define Z_MIN_ENDSTOP_INVERTING 0 // set to 1 to invert the logic of the endstop.
 
 // Direction inverting
-#define INVERT_X_DIR 0    // for Mendel set to 0, for Orca set to 1
-#define INVERT_Y_DIR 0    // for Mendel set to 1, for Orca set to 0
-#define INVERT_Z_DIR 0    // for Mendel set to 0, for Orca set to 1
-#define INVERT_E0_DIR 1    // for direct drive extruder v9 set to 1, for geared extruder set to 0
-#define INVERT_E1_DIR 1    // for direct drive extruder v9 set to 1, for geared extruder set to 0
-#define INVERT_E2_DIR 1    // for direct drive extruder v9 set to 1, for geared extruder set to 0
+#define INVERT_X_DIR 0  // for Mendel set to 0, for Orca set to 1
+#define INVERT_Y_DIR 0  // for Mendel set to 1, for Orca set to 0
+#define INVERT_Z_DIR 0  // for Mendel set to 0, for Orca set to 1
+#define INVERT_E0_DIR 1 // for direct drive extruder v9 set to 1, for geared extruder set to 0
+#define INVERT_E1_DIR 1 // for direct drive extruder v9 set to 1, for geared extruder set to 0
+#define INVERT_E2_DIR 1 // for direct drive extruder v9 set to 1, for geared extruder set to 0
 
 // Home position
 #define MANUAL_X_HOME_POS 0
@@ -73,7 +75,10 @@
 #define Z_PAUSE_LIFT 20
 
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {3000, 3000, 800, 0}  // set the homing speeds (mm/min) // 3000 is also valid for stallGuard homing. Valid range: 2200 - 3000
+#define HOMING_FEEDRATE    \
+    {                      \
+        3000, 3000, 800, 0 \
+    } // set the homing speeds (mm/min) // 3000 is also valid for stallGuard homing. Valid range: 2200 - 3000
 
 /**
  * [0,0] steel sheet print area point X coordinate in bed print area coordinates
@@ -84,16 +89,30 @@
  */
 #define SHEET_PRINT_ZERO_REF_Y 0.f
 
-#define DEFAULT_MAX_FEEDRATE          {200, 200, 12, 120}      // (mm/sec)   max feedrate (M203)
-#define DEFAULT_MAX_FEEDRATE_SILENT         {172, 172, 12, 120}      // (mm/sec)   max feedrate (M203), silent mode
-#define DEFAULT_MAX_ACCELERATION      {1000, 1000, 200, 5000}  // (mm/sec^2) max acceleration (M201)
-#define DEFAULT_MAX_ACCELERATION_SILENT     {960, 960, 200, 5000}    // (mm/sec^2) max acceleration (M201), silent mode
+#define DEFAULT_MAX_FEEDRATE \
+    {                        \
+        200, 200, 12, 120    \
+    } // (mm/sec)   max feedrate (M203)
+#define DEFAULT_MAX_FEEDRATE_SILENT \
+    {                               \
+        172, 172, 12, 120           \
+    } // (mm/sec)   max feedrate (M203), silent mode
+#define DEFAULT_MAX_ACCELERATION \
+    {                            \
+        1000, 1000, 200, 5000    \
+    } // (mm/sec^2) max acceleration (M201)
+#define DEFAULT_MAX_ACCELERATION_SILENT \
+    {                                   \
+        960, 960, 200, 5000             \
+    } // (mm/sec^2) max acceleration (M201), silent mode
 
+#define DEFAULT_ACCELERATION 1250         // X, Y, Z and E max acceleration in mm/s^2 for printing moves (M204S)
+#define DEFAULT_RETRACT_ACCELERATION 1250 // X, Y, Z and E max acceleration in mm/s^2 for retracts (M204T)
 
-#define DEFAULT_ACCELERATION          1250   // X, Y, Z and E max acceleration in mm/s^2 for printing moves (M204S)
-#define DEFAULT_RETRACT_ACCELERATION  1250   // X, Y, Z and E max acceleration in mm/s^2 for retracts (M204T)
-
-#define MANUAL_FEEDRATE {2700, 2700, 1000, 100}   // set the speeds for manual moves (mm/min)
+#define MANUAL_FEEDRATE       \
+    {                         \
+        2700, 2700, 1000, 100 \
+    } // set the speeds for manual moves (mm/min)
 
 //number of bytes from end of the file to start check
 #define END_FILE_SECTION 20000
@@ -119,19 +138,19 @@
 //#define DEBUG_BUILD
 #ifdef DEBUG_BUILD
 //#define _NO_ASM
-#define DEBUG_DCODES //D codes
-#define DEBUG_STACK_MONITOR        //Stack monitor in stepper ISR
+#define DEBUG_DCODES        //D codes
+#define DEBUG_STACK_MONITOR //Stack monitor in stepper ISR
 //#define DEBUG_FSENSOR_LOG          //Reports fsensor status to serial
 //#define DEBUG_CRASHDET_COUNTERS  //Display crash-detection counters on LCD
-//#define DEBUG_RESUME_PRINT       //Resume/save print debug enable 
-//#define DEBUG_UVLO_AUTOMATIC_RECOVER // Power panic automatic recovery debug output 
+//#define DEBUG_RESUME_PRINT       //Resume/save print debug enable
+//#define DEBUG_UVLO_AUTOMATIC_RECOVER // Power panic automatic recovery debug output
 //#define DEBUG_DISABLE_XMINLIMIT  //x min limit ignored
 //#define DEBUG_DISABLE_XMAXLIMIT  //x max limit ignored
 //#define DEBUG_DISABLE_YMINLIMIT  //y min limit ignored
 //#define DEBUG_DISABLE_YMAXLIMIT  //y max limit ignored
 //#define DEBUG_DISABLE_ZMINLIMIT  //z min limit ignored
 //#define DEBUG_DISABLE_ZMAXLIMIT  //z max limit ignored
-//#define DEBUG_DISABLE_STARTMSGS //no startup messages 
+//#define DEBUG_DISABLE_STARTMSGS //no startup messages
 //#define DEBUG_DISABLE_MINTEMP   //mintemp error ignored
 //#define DEBUG_DISABLE_SWLIMITS  //sw limits ignored
 //#define DEBUG_DISABLE_LCD_STATUS_LINE  //empty four lcd line
@@ -145,7 +164,6 @@
 //#define PLANNER_DIAGNOSTICS // Show the planner queue status on printer display.
 //#define CMD_DIAGNOSTICS //Show cmd queue length on printer display
 #endif /* DEBUG_BUILD */
-
 
 /*------------------------------------
  EXTRUDER SETTINGS
@@ -169,29 +187,28 @@
 
 #if defined(E3D_PT100_EXTRUDER_WITH_AMP) || defined(E3D_PT100_EXTRUDER_NO_AMP)
 // Define PID constants for extruder with PT100
-#define  DEFAULT_Kp 21.70
-#define  DEFAULT_Ki 1.60
-#define  DEFAULT_Kd 73.76
+#define DEFAULT_Kp 21.70
+#define DEFAULT_Ki 1.60
+#define DEFAULT_Kd 73.76
 #else
 // Define PID constants for extruder
 //#define  DEFAULT_Kp 40.925
 //#define  DEFAULT_Ki 4.875
 //#define  DEFAULT_Kd 86.085
-#define  DEFAULT_Kp 16.13
-#define  DEFAULT_Ki 1.1625
-#define  DEFAULT_Kd 56.23
+#define DEFAULT_Kp 16.13
+#define DEFAULT_Ki 1.1625
+#define DEFAULT_Kd 56.23
 #endif
 
 // Extrude mintemp
 #define EXTRUDE_MINTEMP 180
 
 // Extruder cooling fans
-#define EXTRUDER_0_AUTO_FAN_PIN   8
-#define EXTRUDER_1_AUTO_FAN_PIN   -1
-#define EXTRUDER_2_AUTO_FAN_PIN   -1
+#define EXTRUDER_0_AUTO_FAN_PIN 8
+#define EXTRUDER_1_AUTO_FAN_PIN -1
+#define EXTRUDER_2_AUTO_FAN_PIN -1
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 50
-#define EXTRUDER_AUTO_FAN_SPEED   255  // == full speed
-
+#define EXTRUDER_AUTO_FAN_SPEED 255 // == full speed
 
 /*------------------------------------
  LOAD/UNLOAD FILAMENT SETTINGS
@@ -255,14 +272,26 @@
  *------------------------------------*/
 
 // Motor Current setting for BIG RAMBo
-#define DIGIPOT_MOTOR_CURRENT {135,135,135,135,135} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
-#define DIGIPOT_MOTOR_CURRENT_LOUD {135,135,135,135,135}
+#define DIGIPOT_MOTOR_CURRENT   \
+    {                           \
+        135, 135, 135, 135, 135 \
+    } // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#define DIGIPOT_MOTOR_CURRENT_LOUD \
+    {                              \
+        135, 135, 135, 135, 135    \
+    }
 
 // Motor Current settings for RAMBo mini PWM value = MotorCurrentSetting * 255 / range
 #if MOTHERBOARD == BOARD_RAMBO_MINI_1_0 || MOTHERBOARD == BOARD_RAMBO_MINI_1_3
 #define MOTOR_CURRENT_PWM_RANGE 2000
-#define DEFAULT_PWM_MOTOR_CURRENT  {270, 830, 450} // {XY,Z,E}
-#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {540, 830, 500} // {XY,Z,E}
+#define DEFAULT_PWM_MOTOR_CURRENT \
+    {                             \
+        270, 830, 450             \
+    } // {XY,Z,E}
+#define DEFAULT_PWM_MOTOR_CURRENT_LOUD \
+    {                                  \
+        540, 830, 500                  \
+    } // {XY,Z,E}
 #define Z_SILENT 0
 #define Z_HIGH_POWER 200
 #endif
@@ -293,9 +322,9 @@
 #define MESH_HOME_Z_CALIB 0.2
 #define MESH_HOME_Z_SEARCH 5 //Z lift for homing, mesh bed leveling etc.
 
-#define X_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle X offset: -left  +right
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 5     // Z probe to nozzle Y offset: -front +behind
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4  // Z probe to nozzle Z offset: -below (always!)
+#define X_PROBE_OFFSET_FROM_EXTRUDER 23   // Z probe to nozzle X offset: -left  +right
+#define Y_PROBE_OFFSET_FROM_EXTRUDER 5    // Z probe to nozzle Y offset: -front +behind
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4 // Z probe to nozzle Z offset: -below (always!)
 #endif
 
 // Bed Temperature Control
@@ -323,19 +352,18 @@
 #define BED_OFFSET_START 40
 #define BED_OFFSET_CENTER 50
 
-
 #ifdef PIDTEMPBED
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
 //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
 #if defined(E3D_PT100_BED_WITH_AMP) || defined(E3D_PT100_BED_NO_AMP)
 // Define PID constants for extruder with PT100
-#define  DEFAULT_bedKp 21.70
-#define  DEFAULT_bedKi 1.60
-#define  DEFAULT_bedKd 73.76
+#define DEFAULT_bedKp 21.70
+#define DEFAULT_bedKi 1.60
+#define DEFAULT_bedKd 73.76
 #else
-#define  DEFAULT_bedKp 126.13
-#define  DEFAULT_bedKi 4.30
-#define  DEFAULT_bedKd 924.76
+#define DEFAULT_bedKp 126.13
+#define DEFAULT_bedKi 4.30
+#define DEFAULT_bedKd 924.76
 #endif
 
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
@@ -346,7 +374,6 @@
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
-
 
 /*-----------------------------------
  PREHEAT SETTINGS
@@ -463,22 +490,21 @@
 #define PINDA_STEP_T 10
 #define PINDA_MAX_T 100
 
-#define PING_TIME 60 //time in s
-#define PING_TIME_LONG 600 //10 min; used when length of commands buffer > 0 to avoid 0 triggering when dealing with long gcodes
+#define PING_TIME 60          //time in s
+#define PING_TIME_LONG 600    //10 min; used when length of commands buffer > 0 to avoid 0 triggering when dealing with long gcodes
 #define PING_ALLERT_PERIOD 60 //time in s
 
-#define NC_TIME 10 //time in s for periodic important status messages sending which needs reponse from monitoring
+#define NC_TIME 10              //time in s for periodic important status messages sending which needs reponse from monitoring
 #define NC_BUTTON_LONG_PRESS 15 //time in s
 
-#define LONG_PRESS_TIME 1000 //time in ms for button long press
+#define LONG_PRESS_TIME 1000     //time in ms for button long press
 #define BUTTON_BLANKING_TIME 200 //time in ms for blanking after button release
 
 #define DEFAULT_PID_TEMP 210
 
 #define MIN_PRINT_FAN_SPEED 75
 
-
-#define M600_TIMEOUT 600  //seconds
+#define M600_TIMEOUT 600 //seconds
 
 //#define SUPPORT_VERBOSITY
 
